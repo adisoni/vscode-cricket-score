@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server code for retrieving and sending score updates",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "selenium-webdriver": "^4.0.0-alpha.4",
+    "socket.io": "^2.2.0"
+  }
+}
