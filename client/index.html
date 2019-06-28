@@ -7,10 +7,20 @@
             var socket = io.connect('http://localhost:3000/');
             socket.on('connect', function () {
                 console.log("new")
-                socket.emit('greetings', {new:"user"})
+                socket.emit
+                (
+                  'new_user', 
+                  {
+                    preferences: ["score"]
+                    
+                  }
+                )
             });
-            socket.on('new_score', msg => {
-                console.log("new score: " + msg)
+            socket.on('update', msg => {
+                console.log("update: " + msg.score)
+            })
+            socket.on('new_user_ack', msg =>{
+              console.log('new user has joined room: ' + msg);
             })
         </script>
   </head>
