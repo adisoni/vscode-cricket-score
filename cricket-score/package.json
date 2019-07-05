@@ -1,6 +1,7 @@
 {
 	"name": "cricket-score",
 	"displayName": "cricket-score",
+	"publisher": "adisoni",
 	"description": "",
 	"version": "0.0.1",
 	"engines": {
