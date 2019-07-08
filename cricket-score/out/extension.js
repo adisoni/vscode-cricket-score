@@ -12,7 +12,7 @@ function activate(context) {
     // This line of code will only be executed once when your extension is activated
     myStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     myStatusBarItem.command = 'extension.helloWorld';
-    var socket = io.connect('http://localhost:3000/');
+    var socket = io.connect('http://ec2-3-15-137-133.us-east-2.compute.amazonaws.com:3000/');
     socket.on('connect', function () {
         console.log("new");
         socket.emit('new_user', {

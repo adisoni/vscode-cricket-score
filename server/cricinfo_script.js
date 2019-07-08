@@ -19,7 +19,7 @@ var callback = function(mutationsList, observer) {
             overs2 = document.getElementById('pane-main').getElementsByClassName('cscore_item--away')[0].getElementsByClassName('cscore_overs')[0].innerText
         } 
         let score = overs1!=='' ? team1 + " " + score1 :team2 + " " + score2
-        fetch('http://localhost:3001/score',{method:'post',headers: {'Content-Type':'application/json'},body:JSON.stringify({score:score})})
+        fetch('http://ec2-3-15-137-133.us-east-2.compute.amazonaws.com:3001/score',{method:'post',headers: {'Content-Type':'application/json'},body:JSON.stringify({score:score})})
         console.log(score)
 };
 
