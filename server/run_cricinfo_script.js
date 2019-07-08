@@ -1,7 +1,12 @@
 const webdriver = require('selenium-webdriver')
+const chrome = require('selenium-webdriver/chrome')
 const fs = require('fs');
 var builder = new webdriver.Builder().withCapabilities({'browserName': 'chrome', acceptSslCerts: true, acceptInsecureCerts: true});
 let script = fs.readFileSync('cricinfo_script.js', 'utf8');
-driver = builder.build()
-driver.get('https://www.espncricinfo.com/series/8039/game/1144524/afghanistan-vs-west-indies-42nd-match-icc-cricket-world-cup-2019')
+const screen = {
+    width: 640,
+    height: 480
+  };
+driver = builder.setChromeOptions(new chrome.Options().headless().windowSize(screen)).build()
+driver.get(process.argv[2])
 driver.executeScript(script)
