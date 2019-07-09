@@ -8,10 +8,6 @@ app.use(bodyParser.json())
 
 app.use(cors())
 
-http.listen(3001, function(){
-  console.log('listening on *:3001');
-});
-
 io.set('origins', '*:*');
 
 io.on('connection', function (socket) {
@@ -25,8 +21,12 @@ io.on('connection', function (socket) {
   socket.on('disconnect', function () { });
 });
 
- app.post('/:room', function(req, res){
-    console.log(req.body.score)
-    io.in(req.params.room).emit('update', req.body)
-    res.json(req.body)
-  });
+app.post('/:room', function(req, res){
+  console.log(req.body)
+  io.in(req.params.room).emit('update', req.body)
+  res.json(req.body)
+});
+
+http.listen(3001, function(){
+  console.log('listening on *:3001');
+});

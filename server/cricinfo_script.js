@@ -1,19 +1,26 @@
 // Select the node that will be observed for mutations
-var targetNode = document.getElementsByClassName('main-content')[0];
+var targetNode = document.getElementById('pane-main').getElementsByClassName('cscore--live')[0];
+var team1 = document.getElementById('pane-main').getElementsByClassName('cscore_item--home')[0].getElementsByClassName('cscore_name--abbrev')[0].innerHTML; 
+var team2 = document.getElementById('pane-main').getElementsByClassName('cscore_item--away')[0].getElementsByClassName('cscore_name--abbrev')[0].innerHTML;
 
 // Options for the observer (which mutations to observe)
 var config = { attributes: true, childList: true, subtree: true };
 
 // Callback function to execute when mutations are observed
 var callback = function(mutationsList, observer) {
-    for(var mutation of mutationsList) {
-        if (mutation.type == 'childList') {
-            console.log('A child node has been added or removed.');
-        }
-        else if (mutation.type == 'attributes') {
-            console.log('The ' + mutation.attributeName + ' attribute was modified.');
-        }
-    }
+        let score1 = document.getElementById('pane-main').getElementsByClassName('cscore_item--home')[0].getElementsByClassName('cscore_score')[0].innerText  
+        let score2 = document.getElementById('pane-main').getElementsByClassName('cscore_item--away')[0].getElementsByClassName('cscore_score')[0].innerText
+        let overs1 = ""
+        let overs2 = ""
+        if(score1.indexOf('*')!=-1) {
+            overs1 = document.getElementById('pane-main').getElementsByClassName('cscore_item--home')[0].getElementsByClassName('cscore_overs')[0].innerText
+        }  
+        if(score2.indexOf('*')!=-1) {
+            overs2 = document.getElementById('pane-main').getElementsByClassName('cscore_item--away')[0].getElementsByClassName('cscore_overs')[0].innerText
+        } 
+        let score = overs1!=='' ? team1 + " " + score1 :team2 + " " + score2
+        fetch('http://ec2-3-15-137-133.us-east-2.compute.amazonaws.com:3001/score',{method:'post',headers: {'Content-Type':'application/json'},body:JSON.stringify({score:score})})
+        console.log(score)
 };
 
 // Create an observer instance linked to the callback function
@@ -21,6 +28,3 @@ var observer = new MutationObserver(callback);
 
 // Start observing the target node for configured mutations
 observer.observe(targetNode, config);
-
-// Later, you can stop observing
-observer.disconnect();
