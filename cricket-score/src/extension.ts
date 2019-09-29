@@ -20,8 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
 		(
 			'new_user', 
 			{
-			preferences: ["score"]
-			
+				preferences: ["score"]
 			}
 		)
 	});
